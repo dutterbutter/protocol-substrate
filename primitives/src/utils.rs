@@ -5,6 +5,7 @@ use sp_std::vec::Vec;
 
 use crate::types::ResourceId;
 
+// TODO(appcypher): Remove
 /// Takes an (ideally u32) ChainIdentifier and a chain type and re-computes
 /// an updated chain id with the chain type prepended to it. The resulting
 /// chain id is 6 bytes long and so requires a u64 to represent it.
@@ -28,6 +29,7 @@ where
 	u64::from_be_bytes(buf)
 }
 
+// TODO(appcypher): Remove
 /// Helper function to concatenate a chain ID and some bytes to produce a
 /// resource ID. The common format is (31 bytes unique ID + 1 byte chain ID).
 pub fn derive_resource_id(chain: u64, id: &[u8]) -> ResourceId {
@@ -47,6 +49,7 @@ pub fn derive_resource_id(chain: u64, id: &[u8]) -> ResourceId {
 	r_id
 }
 
+// TODO(appcypher): Remove
 pub fn parse_resource_id<TreeId, ChainId>(resource_id: ResourceId) -> (TreeId, ChainId)
 where
 	TreeId: Encode + Decode + AtLeast32Bit + Default + Copy,
