@@ -19,7 +19,11 @@ members = [
 	"pallets/vanchor-handler",
 	"pallets/token-wrapper",
 	"pallets/token-wrapper-handler",
-	"standalone/*"
+	"standalone/*",
+	"open-runtime-module-library/currencies",
+	"open-runtime-module-library/tokens",
+	"open-runtime-module-library/traits",
+	"open-runtime-module-library/utilities"
 ]
 
 exclude = [
