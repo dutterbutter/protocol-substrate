@@ -23,6 +23,9 @@ jobs:
       - name: Update apt repositories
         run: sudo apt update
 
+      - name: Fetch
+        run: git clone https://github.com/webb-tools/open-runtime-module-library.git
+
       - name: Fetch submodule deps
         run: git submodule update --init --recursive
 
