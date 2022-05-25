@@ -23,8 +23,11 @@ jobs:
       - name: Update apt repositories
         run: sudo apt update
 
+      - name: Fetch submodule deps
+        run: git submodule update --init --recursive
+
       - name: Build documentation
-        run: cargo doc --no-deps 
+        run: cargo doc --no-deps  --workspace --exclude webb-client
       - name: Publish documentation
         run: |
           cd target/doc
