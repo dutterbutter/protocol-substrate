@@ -10,14 +10,13 @@ jobs:
   docs:
     # if: github.event_name == 'push' && github.event.ref == 'refs/heads/main'
     name: docs
-    runs-on: ubuntu-20.04
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
 
       - name: Install toolchain
         uses: actions-rs/toolchain@v1
         with:
-          profile: minimal
           toolchain: 1.59.0
 
       - name: Update apt repositories
