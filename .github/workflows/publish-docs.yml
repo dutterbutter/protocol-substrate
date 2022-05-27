@@ -17,7 +17,7 @@ jobs:
       - name: Install toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: 1.62.0
+          toolchain: 1.61.0
 
       - name: Update apt repositories
         run: sudo apt update
