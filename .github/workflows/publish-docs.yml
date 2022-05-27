@@ -17,14 +17,13 @@ jobs:
       - name: Install toolchain
         uses: actions-rs/toolchain@v1
         with:
-          profile: minimal
-          toolchain: nightly
+          toolchain: 1.62.0
 
       - name: Update apt repositories
         run: sudo apt update
 
       - name: Build documentation
-        run: cargo doc --no-deps 
+        run: cargo doc --no-deps --release 
       - name: Publish documentation
         run: |
           cd target/doc
