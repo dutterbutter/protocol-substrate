@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="xAnchor Module"><meta name="keywords" content="rust, rustlang, rust-lang, pallet_xanchor"><title>pallet_xanchor - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../storage.js"></script><script defer src="../crates.js"></script><script defer src="../main.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../pallet_xanchor/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../pallet_xanchor/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Crate pallet_xanchor</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.1.0</li><li><a id="all-types" href="all.html">All Items</a></li></ul></div><section><div class="block"><ul><li><a href="#modules">Modules</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../pallet_xanchor/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">pallet_xanchor</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/pallet_xanchor/lib.rs.html#18-753">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="xanchor-module"><a href="#xanchor-module">xAnchor Module</a></h2>
+<p>A module for managing the linking process between anchors.</p>
+<h3 id="overview"><a href="#overview">Overview</a></h3>
+<p>The xanchor module provides functionality for:</p>
+<ul>
+<li>Linking additional anchors from other chains.</li>
+<li>Updates anchors upon sucessfully requested link.</li>
+<li>Signaling the success of the linking process back to the other chain that requested the link.</li>
+</ul>
+<h3 id="interface"><a href="#interface">Interface</a></h3><h4 id="permissionless-functions"><a href="#permissionless-functions">Permissionless Functions</a></h4>
+<ul>
+<li><code>propose_to_link_anchor</code>: Creates a new Proposal to link two anchors cross-chain by creating
+on-chain proposal that once passed will send to the other chain a link proposal.</li>
+<li><code>handle_link_anchor_message</code>: Handles the Link anchor proposal from other chain, by creating
+an on-chain proposal that once passed will link the anchors on the local chain, also signals
+back the caller chain with the proposal hash, so the caller chain know that the link process
+is complete.</li>
+<li><code>sync_anchors</code>: Sync All the Anchors in this chain to the other chains that are already
+linked.</li>
+</ul>
+<h4 id="permissioned-functions"><a href="#permissioned-functions">Permissioned Functions</a></h4>
+<ul>
+<li><code>send_link_anchor_message</code>: Once a proposal is passed, this function will send a Link proposal
+to the other chain also, save the proposal hash locally so when the other chain passes the
+proposal, we get signled back with the proposal hash and we link the anchors. This method
+requires the <code>origin</code> to be [T::DemocracyOrigin].</li>
+<li><code>save_link_proposal</code>: Stores Proposal to link two anchors cross-chain. This method requires
+the <code>origin</code> to be a sibling parachain.</li>
+<li><code>link_anchors</code>: Links chain locally, and signal back to the other chain that requested the
+link that the link process is completed. This method requires the <code>origin</code> to be
+[T::DemocracyOrigin].</li>
+<li><code>handle_link_anchors</code>: Handles the signal back from the other parachain, if the link process
+is there is done to complete the link process here too. This method requires the <code>origin</code> to
+be a sibling parachain.</li>
+<li><code>register_resource_id</code>: Registers this [ResourceId] to an anchor which exists on the other
+chain. Only could be called by [T::DemocracyOrigin].</li>
+<li><code>force_register_resource_id</code>: A Forced version of [Self::register_resource_id] which can be
+only called by the Root.</li>
+<li><code>update</code>: Updates the anchor. This method requires the <code>origin</code> to be a sibling parachain.</li>
+<li><code>force_update</code>: A Forced version of [Self::update] which can be only called by the Root.</li>
+</ul>
+<h3 id="related-modules"><a href="#related-modules">Related Modules</a></h3>
+<ul>
+<li>Anchor Pallet</li>
+<li>Linkable-tree Pallet</li>
+<li>MT pallet</li>
+</ul>
+</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left import-item"><code>pub use <a class="mod" href="pallet/index.html" title="mod pallet_xanchor::pallet">pallet</a>::*;</code></div><div class="item-right docblock-short"></div></div></div><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="pallet/index.html" title="pallet_xanchor::pallet mod">pallet</a></div><div class="item-right docblock-short"><p>The module that hosts all the
+<a href="https://docs.substrate.io/v3/runtime/frame">FRAME</a>
+types needed to add this pallet to a
+runtime.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="types/index.html" title="pallet_xanchor::types mod">types</a></div><div class="item-right docblock-short"></div></div></div><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.chain_id_to_bytes.html" title="pallet_xanchor::chain_id_to_bytes fn">chain_id_to_bytes</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.chain_id_to_para_id.html" title="pallet_xanchor::chain_id_to_para_id fn">chain_id_to_para_id</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.para_id_to_chain_id.html" title="pallet_xanchor::para_id_to_chain_id fn">para_id_to_chain_id</a></div><div class="item-right docblock-short"></div></div></div><h2 id="types" class="small-section-header"><a href="#types">Type Definitions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="type" href="type.ChainIdOf.html" title="pallet_xanchor::ChainIdOf type">ChainIdOf</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.EdgeMetadataOf.html" title="pallet_xanchor::EdgeMetadataOf type">EdgeMetadataOf</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.ElementOf.html" title="pallet_xanchor::ElementOf type">ElementOf</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.LeafIndexOf.html" title="pallet_xanchor::LeafIndexOf type">LeafIndexOf</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.LinkProposalOf.html" title="pallet_xanchor::LinkProposalOf type">LinkProposalOf</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.TreeIdOf.html" title="pallet_xanchor::TreeIdOf type">TreeIdOf</a></div><div class="item-right docblock-short"></div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="pallet_xanchor" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (dc80ca78b 2022-06-21)" ></div>
+</body></html>

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["chain_id_to_bytes",""],["chain_id_to_para_id",""],["para_id_to_chain_id",""]],"mod":[["pallet","The module that hosts all the FRAME types needed to add this pallet to a runtime."],["types",""]],"type":[["ChainIdOf",""],["EdgeMetadataOf",""],["ElementOf",""],["LeafIndexOf",""],["LinkProposalOf",""],["TreeIdOf",""]]};

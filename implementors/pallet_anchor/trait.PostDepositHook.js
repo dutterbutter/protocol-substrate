@@ -1,0 +1,4 @@
+(function() {var implementors = {};
+implementors["pallet_anchor"] = [];
+implementors["pallet_xanchor"] = [{"text":"impl&lt;T:&nbsp;<a class=\"trait\" href=\"pallet_xanchor/pallet/trait.Config.html\" title=\"trait pallet_xanchor::pallet::Config\">Config</a>&lt;I&gt;, I:&nbsp;'static&gt; <a class=\"trait\" href=\"pallet_anchor/trait.PostDepositHook.html\" title=\"trait pallet_anchor::PostDepositHook\">PostDepositHook</a>&lt;T, I&gt; for <a class=\"struct\" href=\"pallet_xanchor/pallet/struct.Pallet.html\" title=\"struct pallet_xanchor::pallet::Pallet\">Pallet</a>&lt;T, I&gt;","synthetic":false,"types":["pallet_xanchor::pallet::Pallet"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
