@@ -18,13 +18,29 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: 1.61.0
+          toolchain: nightly
 
       - name: Update apt repositories
         run: sudo apt update
 
+      - name: Cache Cargo
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            ~/.cargo/bin
+            target
+            target/debug
+            target/release
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Fetch submodules && Build
+        run: |
+          git submodule update --init --recursive && SKIP_WASM_BUILD=1 cargo build --release
+
       - name: Build documentation
-        run: cargo doc --release --workspace --exclude webb-client --no-deps --all-features
+        run: cargo doc --release --workspace --exclude webb-client --no-deps
       - name: Publish documentation
         run: |
           cd target/doc
