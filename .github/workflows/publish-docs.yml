@@ -24,7 +24,7 @@ jobs:
         run: sudo apt update
 
       - name: Build documentation
-        run: cargo doc --release --no-deps 
+        run: cargo doc --release --workspace --exclude webb-client --no-deps 
       - name: Publish documentation
         run: |
           cd target/doc
