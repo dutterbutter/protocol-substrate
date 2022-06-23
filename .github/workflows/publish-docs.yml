@@ -40,7 +40,7 @@ jobs:
           git submodule update --init --recursive
 
       - name: Build documentation
-        run: cargo doc --release --workspace --exclude webb-client --no-deps
+        run: cargo doc --release --no-deps
       - name: Publish documentation
         run: |
           cd target/doc
