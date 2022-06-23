@@ -18,7 +18,7 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: nightly
+          toolchain: 1.62.0
 
       - name: Update apt repositories
         run: sudo apt update
@@ -35,9 +35,9 @@ jobs:
             target/release
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-      - name: Fetch submodules && Build
+      - name: Fetch submodules
         run: |
-          git submodule update --init --recursive && SKIP_WASM_BUILD=1 cargo build --release
+          git submodule update --init --recursive
 
       - name: Build documentation
         run: cargo doc --release --workspace --exclude webb-client --no-deps
